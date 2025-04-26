@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>课程表转ICS文件 - By anduony</title>
+    <title>Excel课程表转ICS导入日历</title>
     <style>
         :root {
             --apple-blue: #0071e3;
@@ -40,6 +40,24 @@
             font-size: 2.5rem;
             letter-spacing: -0.5px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* 新增图片样式 */
+        .demo-image {
+            width: 100%;
+            max-width: 800px;
+            margin: 1rem auto 2rem;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .ios-instruction-image {
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: block;
+            border-radius: 12px;
         }
 
         .controls {
@@ -189,6 +207,18 @@
             margin-bottom: 0.8rem;
         }
 
+        /* 新增链接样式 */
+        .instructions a {
+            color: var(--apple-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .instructions a:hover {
+            color: #0077ED;
+            text-decoration: underline;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
@@ -215,13 +245,20 @@
             .reminder-select {
                 min-width: 120px;
             }
+
+            .demo-image {
+                margin: 1rem auto;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>课程表转 ICS 文件 By anduony</h1>
+        <h1>日程转 ICS 文件导入日历📅</h1>
         
+        <!-- 实际效果图 -->
+        <img src="xiaoguo.png" alt="效果展示" class="demo-image">
+
         <div class="controls">
             <label style="display: flex; align-items: center; gap: 0.5rem;">
                 <span style="color: var(--apple-gray-3);">重复周期:</span>
@@ -266,8 +303,9 @@
         </table>
 
         <div class="instructions">
-            <h3>使用说明</h3>
+            <h3>💡使用说明</h3>
             <ul>
+                <li>📱iOS用户推荐使用<a href="https://www.icloud.com/shortcuts/63aafa849ce84b12942970726ca939e1">ICS导入日历捷径</a></li>
                 <li>双击单元格可直接编辑内容</li>
                 <li>支持从Excel复制多行数据直接粘贴到表格</li>
                 <li>时间格式示例：08:00-09:30（24小时制）</li>
@@ -275,14 +313,18 @@
                 <li>设置好重复日期范围和提醒时间后点击生成按钮</li>
             </ul>
 
-            <h3 style="margin-top: 1.5rem;">注意事项</h3>
+            <h3 style="margin-top: 1.5rem;">💡注意事项</h3>
             <ul>
                 <li>开始日期需早于结束日期</li>
                 <li>空单元格不会生成日历事件</li>
                 <li>提醒功能在不同日历客户端可能有差异</li>
                 <li>建议使用Chrome或Safari浏览器</li>
+                <li>iOS用户请参考下图导入说明：</li>
             </ul>
         </div>
+	<h3 style="margin-top: 1.5rem;">💡IOS添加ICS方法</h3>
+        <!-- iOS说明图片 -->
+        <img src="shuoming.png" alt="iOS导入说明" class="ios-instruction-image">
     </div>
 
 <script>
@@ -511,10 +553,6 @@ function formatUTCTime(date) {
     return date.toISOString()
         .replace(/-|:|\.\d{3}/g, '')
         .slice(0, 15) + 'Z';
-}
-
-function getWeekdayAbbr(weekday) {
-    return ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'][weekday - 1];
 }
 
 function downloadFile(filename, content) {
